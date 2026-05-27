@@ -20,3 +20,6 @@ rad.json
 *.flf
 #Test results file
 TestResults.xml
+.ipynb_checkpoints/Code_kata_solutions-checkpoint.ipynb
+.ipynb_checkpoints/Untitled-checkpoint.ipynb
+.DS_Store
