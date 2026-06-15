@@ -1,0 +1,75 @@
+# Jupyter
+jupyter
+jupyterlab
+notebook
+ipykernel
+ipywidgets
+
+# Core scientific stack
+numpy
+pandas
+scipy
+matplotlib
+seaborn
+plotly
+
+# Classical ML
+scikit-learn
+xgboost
+lightgbm
+statsmodels
+imbalanced-learn
+
+# Deep Learning (PyTorch - recommended for Apple Silicon, has MPS support)
+torch
+torchvision
+torchaudio
+
+# Deep Learning (TensorFlow - optional, install only if course requires it)
+# tensorflow
+# keras
+
+# NLP
+nltk
+spacy
+#gensim
+transformers
+sentence-transformers
+datasets
+tokenizers
+
+# Generative AI / LLM tooling
+openai
+anthropic
+langchain
+langchain-community
+langchain-openai
+langchain-anthropic
+chromadb
+faiss-cpu
+tiktoken
+
+# MLOps
+mlflow
+dvc
+wandb
+
+# Data utilities
+openpyxl
+xlrd
+pyarrow
+sqlalchemy
+beautifulsoup4
+requests
+lxml
+tqdm
+
+# Visualization extras
+bokeh
+altair
+
+# Dev tools
+black
+ruff
+pytest
+python-dotenv
