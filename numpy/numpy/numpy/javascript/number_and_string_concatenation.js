@@ -1,0 +1,8 @@
+console.log("1"+2+3) // "123" (1 is a string, so 2 and 3 are concatenated as strings)
+console.log(1+"2"+3) // "123" (1 is a number, but "2" is a string, so 1 is converted to a string and concatenated with "2", then 3 is concatenated as a string)
+console.log(1+2+"3") // "33" (1 and 2 are numbers, so they are added to get 3, then "3" is concatenated as a string)
+console.log("Hello" + " " + "World") // "Hello World" (all are strings, so they are concatenated)
+console.log("The answer is: " + 42) // "The answer is: 42" (42 is a number, but it is converted to a string and concatenated with the rest)
+console.log("5" + 10) // "510" (5 is a string, so 10 is converted to a string and concatenated)
+console.log(5 + "10") // "510" (5 is a number, but "10" is a string, so 5 is converted to a string and concatenated)
+console.log("5" + "10") // "510" (both are strings, so they are concatenated)
