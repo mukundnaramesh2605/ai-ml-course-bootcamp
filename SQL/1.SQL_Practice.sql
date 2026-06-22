@@ -65,3 +65,13 @@ select emp_name,dept_id from employees where dept_id in (1,3);
 -- emp_name
 
 select emp_name from employees where emp_name like 'A%';
+
+
+-- Find employees who joined after January 1st, 2023.
+--
+-- Display:
+-- emp_name
+-- joining_date
+
+
+select emp_name from employees where joining_date > '2023-01-01';
