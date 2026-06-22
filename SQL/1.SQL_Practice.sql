@@ -63,3 +63,5 @@ select emp_name,dept_id from employees where dept_id in (1,3);
 --
 -- Display:
 -- emp_name
+
+select emp_name from employees where emp_name like 'A%';
