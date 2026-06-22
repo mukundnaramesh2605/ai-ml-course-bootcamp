@@ -75,3 +75,16 @@ select emp_name from employees where emp_name like 'A%';
 
 
 select emp_name from employees where joining_date > '2023-01-01';
+
+
+-- Find the total number of employees.
+--
+-- Display:
+-- total_employees
+select count(*) as "total_employees" from employees;
+
+
+-- Find the average salary of all employees.
+--
+-- Display:
+-- average_salary
