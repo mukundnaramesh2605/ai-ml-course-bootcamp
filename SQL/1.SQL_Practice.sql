@@ -26,3 +26,5 @@ order by salary desc;
 --
 -- Display:
 -- dept_id
+
+select DISTINCT dept_id from employees;
