@@ -90,3 +90,4 @@ select count(*) as "total_employees" from employees;
 -- average_salary
 
 select avg(salary) from employees;
+
