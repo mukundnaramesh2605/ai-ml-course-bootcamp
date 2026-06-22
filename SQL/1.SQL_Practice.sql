@@ -38,3 +38,28 @@ select DISTINCT dept_id from employees;
 
 select emp_name, salary from employees order by salary desc
 limit 3;
+
+
+-- Find employees whose salary is between 55000 and 70000.
+--
+-- Display:
+-- emp_name
+-- salary
+
+select emp_name, salary from employees where salary between 55000 and  70000;
+
+
+-- Find employees who belong to department 1 or department 3.
+--
+-- Display:
+-- emp_name
+-- dept_id
+
+
+select emp_name,dept_id from employees where dept_id in (1,3);
+
+
+-- Find employees whose names start with the letter 'A'.
+--
+-- Display:
+-- emp_name
