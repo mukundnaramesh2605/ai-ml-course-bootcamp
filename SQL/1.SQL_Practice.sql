@@ -28,3 +28,13 @@ order by salary desc;
 -- dept_id
 
 select DISTINCT dept_id from employees;
+
+
+-- Find the top 3 highest-paid employees.
+--
+-- Display:
+-- emp_name
+-- salary
+
+select emp_name, salary from employees order by salary desc
+limit 3;
