@@ -102,3 +102,12 @@ select avg(salary) from employees;
 
 select dept_id,count(*) as "employee_count" from employees
 group by dept_id;
+
+-- Find the average salary in each department.
+--
+-- Display:
+-- dept_id
+-- avg_salary
+
+select dept_id,avg(salary) as "avg_salary" from employees
+group by dept_id;
