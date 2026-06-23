@@ -174,3 +174,14 @@ inner join departments d on d.dept_id = e.dept_id;
 select e.emp_name, d.dept_name, e.salary from employees e
 inner join departments d on d.dept_id = e.dept_id
 order by e.salary desc;
+
+
+-- Find all employees who belong to the Engineering department.
+--
+-- Output:
+-- emp_name
+-- dept_name
+
+select e.emp_name, d.dept_name from employees e
+inner join departments d on d.dept_id = e.dept_id
+where d.dept_name = 'Engineering';
