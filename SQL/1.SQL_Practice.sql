@@ -119,5 +119,15 @@ group by dept_id;
 -- dept_id
 -- highest_salary
 
-select dept_id,MAX(salary) as "avg_salary" from employees
+select dept_id,MAX(salary) as "highest_salary" from employees
 group by dept_id;
+
+-- Find departments having more than 2 employees.
+--
+-- Display:
+-- dept_id
+-- employee_count
+select dept_id,count(*) as "employee_count" from employees
+group by dept_id
+having count(*) >2 ;
+
