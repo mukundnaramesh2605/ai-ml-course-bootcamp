@@ -152,3 +152,13 @@ select dept_id,avg(salary) as "avg_salary" from employees
 group by dept_id
 order by avg(salary) desc
 limit 1;
+
+
+-- Display employee names along with their department names.
+--
+-- Output:
+-- emp_name
+-- dept_name
+
+select e.emp_name, d.dept_name from employees e
+inner join departments d on d.dept_id = e.dept_id;
