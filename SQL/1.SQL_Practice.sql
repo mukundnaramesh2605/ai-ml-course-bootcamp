@@ -140,3 +140,15 @@ having count(*) >2 ;
 
 select dept_id,round(avg(age),0) as "average_age" from employees
 group by dept_id;
+
+
+-- Find the department with the highest average salary.
+--
+-- Display:
+-- dept_id
+-- avg_salary
+
+select dept_id,avg(salary) as "avg_salary" from employees
+group by dept_id
+order by avg(salary) desc
+limit 1;
