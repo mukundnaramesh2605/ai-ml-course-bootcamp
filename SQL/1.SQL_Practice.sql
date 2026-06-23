@@ -201,3 +201,19 @@ group by d.dept_name;
 select d.dept_name,AVG(e.salary) from employees e
 inner join departments d on d.dept_id = e.dept_id
 group by d.dept_name;
+
+
+-- Find the department with the highest total payroll.
+--
+-- Payroll = sum of salaries in that department.
+--
+-- Output:
+-- dept_name
+-- total_payroll
+
+select d.dept_name,SUM(e.salary) from employees e
+inner join departments d on d.dept_id = e.dept_id
+group by d.dept_name
+order by SUM(e.salary) desc
+LIMIT 1;
+
