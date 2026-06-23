@@ -185,3 +185,13 @@ order by e.salary desc;
 select e.emp_name, d.dept_name from employees e
 inner join departments d on d.dept_id = e.dept_id
 where d.dept_name = 'Engineering';
+
+
+-- Display: Employee Count by Department Name
+-- dept_name
+-- employee_count
+
+select d.dept_name,count(e.emp_name) from employees e
+inner join departments d on d.dept_id = e.dept_id
+group by d.dept_name;
+
