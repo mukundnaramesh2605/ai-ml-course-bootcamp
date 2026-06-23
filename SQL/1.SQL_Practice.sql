@@ -226,7 +226,6 @@ LIMIT 1;
 
 select e.emp_name, p.project_name from employee_projects ep
 join projects p on p.project_id = ep.project_id
-join employees e on e.emp_id = ep.emp_id
-group by p.project_id,e.emp_name;
+join employees e on e.emp_id = ep.emp_id;
 
 
