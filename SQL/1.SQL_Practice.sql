@@ -111,3 +111,13 @@ group by dept_id;
 
 select dept_id,avg(salary) as "avg_salary" from employees
 group by dept_id;
+
+
+-- Find the highest salary in each department.
+--
+-- Display:
+-- dept_id
+-- highest_salary
+
+select dept_id,MAX(salary) as "avg_salary" from employees
+group by dept_id;
