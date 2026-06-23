@@ -131,3 +131,12 @@ select dept_id,count(*) as "employee_count" from employees
 group by dept_id
 having count(*) >2 ;
 
+
+-- Find the average age of employees in each department.
+--
+-- Display:
+-- dept_id
+-- average_age
+
+select dept_id,round(avg(age),0) as "average_age" from employees
+group by dept_id;
