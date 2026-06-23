@@ -162,3 +162,15 @@ limit 1;
 
 select e.emp_name, d.dept_name from employees e
 inner join departments d on d.dept_id = e.dept_id;
+
+
+-- Display:
+-- emp_name
+-- dept_name
+-- salary
+--
+-- Sort by salary descending.
+
+select e.emp_name, d.dept_name, e.salary from employees e
+inner join departments d on d.dept_id = e.dept_id
+order by e.salary desc;
