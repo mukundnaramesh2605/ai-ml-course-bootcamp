@@ -195,3 +195,9 @@ select d.dept_name,count(e.emp_name) from employees e
 inner join departments d on d.dept_id = e.dept_id
 group by d.dept_name;
 
+-- Display: Average Salary by Department Name
+-- dept_name
+-- avg_salary
+select d.dept_name,AVG(e.salary) from employees e
+inner join departments d on d.dept_id = e.dept_id
+group by d.dept_name;
