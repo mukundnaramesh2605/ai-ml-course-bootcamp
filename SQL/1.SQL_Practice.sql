@@ -217,3 +217,16 @@ group by d.dept_name
 order by SUM(e.salary) desc
 LIMIT 1;
 
+
+-- Display all employees and the projects they are assigned to.
+--
+-- Output:
+-- emp_name
+-- project_name
+
+select e.emp_name, p.project_name from employee_projects ep
+join projects p on p.project_id = ep.project_id
+join employees e on e.emp_id = ep.emp_id
+group by p.project_id,e.emp_name;
+
+
