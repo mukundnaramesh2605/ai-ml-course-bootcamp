@@ -91,3 +91,14 @@ select count(*) as "total_employees" from employees;
 
 select avg(salary) from employees;
 
+
+
+-- Find the number of employees in each department.
+--
+-- Display:
+-- dept_id
+-- employee_count
+
+
+select dept_id,count(*) as "employee_count" from employees
+group by dept_id;
