@@ -356,3 +356,26 @@ having max(salary) = (select max(salary) from employees where dept_id = e.dept_i
 select emp_name,dept_id,joining_date from employees e
 group by emp_name,dept_id
 having joining_date < (select AVG(joining_date) from employees where dept_id = e.dept_id)
+
+
+
+-- Find departments whose employee count
+-- is greater than the company average
+-- department size.
+--
+-- Output:
+-- dept_id
+-- employee_count
+
+select dept_id, count(*) as employee_count from employees e
+group by dept_id
+having count(*) > (select AVG(count(emp_name)) from employees where dept_id = e.dept_id);
+
+-- Find employees whose salary is greater than
+-- the average salary of employees with the
+-- same gender.
+--
+-- Output:
+-- emp_name
+-- gender
+-- salary
