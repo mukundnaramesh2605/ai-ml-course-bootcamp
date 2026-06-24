@@ -284,3 +284,19 @@ where salary > (select avg(salary) from employees
 
 select emp_name from employees 
 where emp_id not in (select emp_id from employee_projects);
+
+
+-- Find the second highest salary
+-- in the company.
+--
+-- Output:
+-- salary
+
+select salary from employees
+order by salary desc
+limit 1 offset 1; 
+-- or 
+select salary from employees
+where salary < (select max(salary) from employees)
+order by salary desc
+limit 1;
