@@ -383,3 +383,34 @@ having count(*) > (select AVG(count(emp_name)) from employees where dept_id = e.
 select emp_name,gender,salary from employees e
 group by emp_name,gender,salary
 having salary > (select avg(salary) from employees where gender=e.gender);
+
+-- Find departments whose average salary is
+-- greater than the average salary of the
+-- Sales department.
+--
+-- Output:
+-- dept_name
+-- avg_salary
+select d.dept_name from employees e
+join departments d on d.dept_id = e.dept_id
+group by d.dept_name
+having avg(e.salary) > (select avg(salary) from employees e1
+join departments d1 on d1.dept_id = e1.dept_id
+where d1.dept_name = 'Sales');
+
+
+
+-- Find employees who work on at least one
+-- project whose budget is above the average
+-- project budget.
+--
+-- Output:
+-- emp_name
+
+select e.emp_name from employee_projects ep 
+join employees e on ep.emp_id = e.emp_id
+join projects p on p.project_id = ep.project_id
+group by e.emp_name,p.budget
+having p.budget > (select avg(budget) from projects)
+
+
