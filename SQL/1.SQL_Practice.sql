@@ -329,3 +329,19 @@ limit 1;
 
 select emp_name,salary from employees
 where salary > (select avg(salary) from employees);
+
+
+-- Find employees who earn the maximum salary
+-- in their department.
+--
+-- Output:
+-- emp_name
+-- dept_id
+-- salary
+
+
+
+
+select emp_name,dept_id,MAX(salary) as salary from employees e
+group by dept_id,emp_name
+having max(salary) = (select max(salary) from employees where dept_id = e.dept_id)
