@@ -317,3 +317,15 @@ select salary from employees
 where salary < (select max(salary) from employees)
 order by salary desc
 limit 1;
+
+
+
+-- Find employees whose salary is greater than
+-- the overall average salary.
+--
+-- Output:
+-- emp_name
+-- salary
+
+select emp_name,salary from employees
+where salary > (select avg(salary) from employees);
