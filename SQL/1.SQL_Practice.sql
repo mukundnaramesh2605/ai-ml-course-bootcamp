@@ -261,8 +261,17 @@ where salary=(select max(salary)from employees);
 -- dept_id
 -- salary
 
-select emp_name,dept_id,salary from employees
-where salary > (select avg(salary) from employees
+SELECT
+    emp_name,
+    dept_id,
+    salary
+FROM employees e
+WHERE salary >
+(
+    SELECT AVG(salary)
+    FROM employees
+    WHERE dept_id = e.dept_id
+);
 
 
 
@@ -273,8 +282,16 @@ where salary > (select avg(salary) from employees
 -- dept_name
 -- avg_salary
 
-
-
+SELECT
+    dept_id,
+    AVG(salary) AS avg_salary
+FROM employees
+GROUP BY dept_id
+HAVING AVG(salary) >
+(
+    SELECT AVG(salary)
+    FROM employees
+);
 
 -- Find employees who are not assigned
 -- to any project.
