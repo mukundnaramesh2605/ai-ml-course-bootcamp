@@ -379,3 +379,7 @@ having count(*) > (select AVG(count(emp_name)) from employees where dept_id = e.
 -- emp_name
 -- gender
 -- salary
+
+select emp_name,gender,salary from employees e
+group by emp_name,gender,salary
+having salary > (select avg(salary) from employees where gender=e.gender);
