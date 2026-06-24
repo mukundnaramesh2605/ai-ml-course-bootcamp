@@ -250,3 +250,37 @@ where salary > (select AVG(salary) from employees);
 
 select emp_name,salary from employees
 where salary=(select max(salary)from employees);
+
+
+
+-- Find employees who earn more than the
+-- average salary of their department.
+--
+-- Output:
+-- emp_name
+-- dept_id
+-- salary
+
+select emp_name,dept_id,salary from employees
+where salary > (select avg(salary) from employees
+
+
+
+-- Find departments whose average salary
+-- is greater than the company average salary.
+--
+-- Output:
+-- dept_name
+-- avg_salary
+
+
+
+
+-- Find employees who are not assigned
+-- to any project.
+--
+-- Output:
+-- emp_name
+
+select emp_name from employees 
+where emp_id not in (select emp_id from employee_projects);
