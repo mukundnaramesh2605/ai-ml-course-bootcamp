@@ -229,3 +229,13 @@ join projects p on p.project_id = ep.project_id
 join employees e on e.emp_id = ep.emp_id;
 
 
+
+-- Find employees whose salary is greater than
+-- the average salary of all employees.
+--
+-- Output:
+-- emp_name
+-- salary
+
+select emp_name from employees 
+where salary > (select AVG(salary) from employees)
