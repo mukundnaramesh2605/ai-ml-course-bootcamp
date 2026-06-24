@@ -414,3 +414,17 @@ group by e.emp_name,p.budget
 having p.budget > (select avg(budget) from projects)
 
 
+-- Find departments whose total payroll is
+-- greater than the average department payroll.
+--
+-- Payroll = SUM(salary)
+--
+-- Output:
+-- dept_id
+-- total_payroll
+
+select dept_id, sum(salary) as total_payroll from employees e
+group by dept_id
+having sum(salary) > (select avg(salary) from employees where dept_id = e.dept_id)
+
+
