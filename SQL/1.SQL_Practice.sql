@@ -238,4 +238,15 @@ join employees e on e.emp_id = ep.emp_id;
 -- salary
 
 select emp_name from employees 
-where salary > (select AVG(salary) from employees)
+where salary > (select AVG(salary) from employees);
+
+
+-- Find employees who earn the highest salary
+-- in the company.
+--
+-- Output:
+-- emp_name
+-- salary
+
+select emp_name,salary from employees
+where salary=(select max(salary)from employees);
