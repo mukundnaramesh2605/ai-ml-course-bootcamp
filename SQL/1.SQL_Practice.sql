@@ -340,8 +340,19 @@ where salary > (select avg(salary) from employees);
 -- salary
 
 
-
-
 select emp_name,dept_id,MAX(salary) as salary from employees e
 group by dept_id,emp_name
 having max(salary) = (select max(salary) from employees where dept_id = e.dept_id)
+
+
+-- Find employees who joined earlier than the
+-- average joining date of their department.
+--
+-- Output:
+-- emp_name
+-- dept_id
+-- joining_date
+
+select emp_name,dept_id,joining_date from employees e
+group by emp_name,dept_id
+having joining_date < (select AVG(joining_date) from employees where dept_id = e.dept_id)
