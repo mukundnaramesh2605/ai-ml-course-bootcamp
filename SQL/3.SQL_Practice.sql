@@ -21,3 +21,18 @@ SELECT employee_name,SALARY from  employees;
 
 
 select * from employees where department = "IT";	
+
+
+-- =====================================================
+-- QUESTION 3
+-- Difficulty: ⭐
+--
+-- Display the employee_name, department,
+-- and salary of employees whose salary
+-- is greater than 75000.
+--
+-- Expected Columns:
+-- employee_name | department | salary
+-- =====================================================
+
+select employee_name,department,salary from employees where salary> 75000;
