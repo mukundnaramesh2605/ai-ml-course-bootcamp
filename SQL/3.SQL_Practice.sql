@@ -10,3 +10,14 @@
 -- =====================================================
 
 SELECT employee_name,SALARY from  employees;
+
+-- =====================================================
+-- QUESTION 2
+-- Difficulty: ⭐
+--
+-- Display all columns for employees
+-- who belong to the IT department.
+-- =====================================================
+
+
+select * from employees where department = "IT";	
