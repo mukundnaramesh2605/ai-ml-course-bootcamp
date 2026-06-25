@@ -65,3 +65,18 @@ SELECT employee_name,city from employees where city='Chennai';
 
 select employee_name,salary,bonus from employees where salary between 60000 and 90000;
 
+
+-- =====================================================
+-- QUESTION 6
+-- Difficulty: ⭐⭐
+--
+-- Display the employee_name and department
+-- of employees whose department is
+-- either HR or Finance.
+--
+-- Expected Columns:
+-- employee_name | department
+-- =====================================================
+select employee_name,department from employees where department in ('HR','IT');
+
+
