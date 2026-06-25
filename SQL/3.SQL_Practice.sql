@@ -79,4 +79,19 @@ select employee_name,salary,bonus from employees where salary between 60000 and 
 -- =====================================================
 select employee_name,department from employees where department in ('HR','IT');
 
+-- =====================================================
+-- QUESTION 7
+-- Difficulty: ⭐⭐
+--
+-- Display the employee_name, job_title,
+-- and salary of employees whose
+-- job_title contains the word 'Engineer'.
+--
+-- Expected Columns:
+-- employee_name | job_title | salary
+-- =====================================================
+select employee_name,job_title,salary from employees where job_title like "%Engineer%";
+
+
+
 
