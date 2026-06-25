@@ -116,6 +116,25 @@ select * from employees where joining_date > '2021-01-01';
 select employee_name ,salary,experience_years from employees where salary > 80000 and experience_years> 8;
 
 
+-- =====================================================
+-- QUESTION 10
+-- Difficulty: ⭐⭐⭐
+--
+-- Display the employee_name, department,
+-- and city of employees who:
+--
+-- 1. Work in the IT department
+-- 2. Live in Bangalore
+-- 3. Earn more than 80000
+--
+-- Expected Columns:
+-- employee_name | department | city
+-- =====================================================
+select employee_name,department,city from employees where salary > 80000 and city='Bangalore' and department='IT';
+
+
+
+
 
 
 
