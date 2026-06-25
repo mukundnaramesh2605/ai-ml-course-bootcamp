@@ -36,3 +36,18 @@ select * from employees where department = "IT";
 -- =====================================================
 
 select employee_name,department,salary from employees where salary> 75000;
+
+
+-- =====================================================
+-- QUESTION 4
+-- Difficulty: ⭐
+--
+-- Display the employee_name and city
+-- of employees who live in Chennai.
+--
+-- Expected Columns:
+-- employee_name | city
+-- =====================================================
+SELECT employee_name,city from employees where city='Chennai';
+
+
