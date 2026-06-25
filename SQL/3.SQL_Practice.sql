@@ -92,6 +92,15 @@ select employee_name,department from employees where department in ('HR','IT');
 -- =====================================================
 select employee_name,job_title,salary from employees where job_title like "%Engineer%";
 
+-- =====================================================
+-- QUESTION 8
+-- Difficulty: ⭐⭐
+--
+-- Display all employees who joined
+-- after '2021-01-01'.
+-- =====================================================
+select * from employees where joining_date > '2021-01-01';
+
 
 
 
