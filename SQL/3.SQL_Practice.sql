@@ -101,6 +101,21 @@ select employee_name,job_title,salary from employees where job_title like "%Engi
 -- =====================================================
 select * from employees where joining_date > '2021-01-01';
 
+-- =====================================================
+-- QUESTION 9
+-- Difficulty: ⭐⭐
+--
+-- Display the employee_name, salary,
+-- and experience_years of employees
+-- whose salary is greater than 80000
+-- AND experience_years is greater than 8.
+--
+-- Expected Columns:
+-- employee_name | salary | experience_years
+-- =====================================================
+select employee_name ,salary,experience_years from employees where salary > 80000 and experience_years> 8;
+
+
 
 
 
