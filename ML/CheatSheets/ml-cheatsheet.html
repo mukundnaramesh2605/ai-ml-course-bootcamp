@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Classical ML — Which Model When</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500&display=swap');
+
+  :root{
+    --ink:#1c1a17;
+    --paper:#faf7f0;
+    --line:#e0d9cc;
+    --sub:#6b6357;
+    --accent:#2f6f5e;
+    --accent-soft:#e7efe9;
+    --warn:#a8622a;
+    --warn-soft:#f4e7dc;
+    --chip:#efe9dc;
+  }
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--paper);
+    color:var(--ink);
+    font-family:'Inter',system-ui,sans-serif;
+    line-height:1.5;
+    -webkit-font-smoothing:antialiased;
+  }
+  .wrap{max-width:1080px;margin:0 auto;padding:48px 32px 80px;}
+
+  header{border-bottom:2px solid var(--ink);padding-bottom:22px;margin-bottom:8px;}
+  .eyebrow{font-family:'JetBrains Mono',monospace;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--accent);margin:0 0 10px;}
+  h1{font-family:'Fraunces',serif;font-weight:600;font-size:44px;line-height:1.02;margin:0 0 8px;letter-spacing:-.01em;}
+  .lede{color:var(--sub);font-size:15px;max-width:60ch;margin:0;}
+
+  section{margin-top:44px;}
+  .sec-head{display:flex;align-items:baseline;gap:14px;border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:20px;}
+  .sec-num{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--accent);}
+  h2{font-family:'Fraunces',serif;font-weight:600;font-size:24px;margin:0;letter-spacing:-.01em;}
+
+  .grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;}
+  @media(max-width:720px){.grid{grid-template-columns:1fr;}}
+
+  .card{background:#fff;border:1px solid var(--line);border-radius:10px;padding:18px 18px 16px;}
+  .card h3{font-family:'Fraunces',serif;font-size:18px;font-weight:600;margin:0 0 4px;}
+  .card .tag{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--sub);letter-spacing:.04em;}
+  .row{display:flex;gap:8px;margin-top:12px;font-size:13.5px;}
+  .row .k{flex:0 0 62px;color:var(--accent);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;padding-top:2px;}
+  .row .v{flex:1;color:var(--ink);}
+  .row.warn .k{color:var(--warn);}
+
+  table{width:100%;border-collapse:collapse;font-size:13.5px;}
+  th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top;}
+  th{font-family:'JetBrains Mono',monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--sub);font-weight:500;background:var(--chip);}
+  tr:last-child td{border-bottom:none;}
+  td:first-child{font-weight:600;white-space:nowrap;}
+  .tbl-wrap{border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff;}
+
+  .flow{background:var(--accent-soft);border:1px solid #cfe0d6;border-radius:10px;padding:20px 22px;}
+  .flow ol{margin:0;padding-left:0;list-style:none;counter-reset:step;}
+  .flow li{counter-increment:step;padding:9px 0 9px 44px;position:relative;font-size:14px;border-bottom:1px dashed #cfe0d6;}
+  .flow li:last-child{border-bottom:none;}
+  .flow li::before{content:counter(step);position:absolute;left:0;top:8px;width:28px;height:28px;background:var(--accent);color:#fff;font-family:'JetBrains Mono',monospace;font-size:13px;border-radius:50%;display:grid;place-items:center;}
+  .flow b{color:var(--accent);}
+
+  .chips{display:flex;flex-wrap:wrap;gap:7px;margin-top:12px;}
+  .chip{font-family:'JetBrains Mono',monospace;font-size:11px;background:var(--chip);border:1px solid var(--line);border-radius:20px;padding:4px 11px;color:var(--ink);}
+
+  .pitfall{background:var(--warn-soft);border-left:3px solid var(--warn);border-radius:0 8px 8px 0;padding:13px 16px;margin-top:12px;font-size:13.5px;}
+  .pitfall b{color:var(--warn);}
+
+  footer{margin-top:56px;border-top:1px solid var(--line);padding-top:16px;font-size:12px;color:var(--sub);font-family:'JetBrains Mono',monospace;}
+
+  @media print{
+    body{background:#fff;}
+    .card,.tbl-wrap,.flow{break-inside:avoid;}
+    section{break-inside:avoid;}
+  }
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <p class="eyebrow">Classical ML / Decision Reference</p>
+    <h1>Which Model When</h1>
+    <p class="lede">A working reference for classical ML model selection. Left side is for fast interview recall, right side for real project calls. No deep learning, no LLMs.</p>
+  </header>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">01</span><h2>Start here: the 30-second decision</h2></div>
+    <div class="flow">
+      <ol>
+        <li>Is the target a <b>label or a number?</b> Label to classification, number to regression. No target to clustering or dimensionality reduction.</li>
+        <li>Need to <b>explain every prediction</b> to a stakeholder? Start with Linear/Logistic Regression or a single Decision Tree.</li>
+        <li>Want <b>best accuracy on tabular data</b> and can trade interpretability? Go straight to Gradient Boosting (XGBoost / LightGBM).</li>
+        <li>Dataset <b>small or noisy</b>, features many? Regularized linear models or SVM.</li>
+        <li>Only when tabular boosting underperforms do you reach for anything heavier.</li>
+      </ol>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">02</span><h2>Supervised: classification & regression</h2></div>
+    <div class="grid">
+
+      <div class="card">
+        <h3>Linear / Logistic Regression</h3>
+        <span class="tag">baseline · interpretable · fast</span>
+        <div class="row"><span class="k">Use</span><span class="v">Linear relationships, need coefficients you can explain, want a baseline before anything fancy.</span></div>
+        <div class="row"><span class="k">Skip</span><span class="v">Strong non-linear patterns, heavy feature interactions.</span></div>
+        <div class="row warn"><span class="k">Watch</span><span class="v">Scale features, check multicollinearity, regularize (L1/L2) when features outnumber clean signal.</span></div>
+      </div>
+
+      <div class="card">
+        <h3>Decision Tree</h3>
+        <span class="tag">interpretable · non-linear · unstable</span>
+        <div class="row"><span class="k">Use</span><span class="v">Need a human-readable rule set, mixed feature types, non-linear splits, no scaling needed.</span></div>
+        <div class="row"><span class="k">Skip</span><span class="v">You need stable, high accuracy. A single tree overfits easily.</span></div>
+        <div class="row warn"><span class="k">Watch</span><span class="v">Prune or cap depth. Tiny data changes reshape the whole tree.</span></div>
+      </div>
+
+      <div class="card">
+        <h3>Random Forest</h3>
+        <span class="tag">robust · low-tuning · tabular</span>
+        <div class="row"><span class="k">Use</span><span class="v">Strong default for tabular. Handles non-linearity and noise, minimal tuning, gives feature importance.</span></div>
+        <div class="row"><span class="k">Skip</span><span class="v">Very large data where boosting wins, or when you need the single best score.</span></div>
+        <div class="row warn"><span class="k">Watch</span><span class="v">Larger and slower than boosting at similar accuracy. Less interpretable than one tree.</span></div>
+      </div>
+
+      <div class="card">
+        <h3>Gradient Boosting (XGBoost / LightGBM)</h3>
+        <span class="tag">top tabular accuracy · tunable</span>
+        <div class="row"><span class="k">Use</span><span class="v">The go-to for winning tabular performance, structured data, competitions, most production tabular tasks.</span></div>
+        <div class="row"><span class="k">Skip</span><span class="v">Tiny datasets, or when full interpretability is mandatory.</span></div>
+        <div class="row warn"><span class="k">Watch</span><span class="v">Sensitive to hyperparameters. Can overfit without early stopping and learning-rate control.</span></div>
+      </div>
+
+      <div class="card">
+        <h3>Support Vector Machine (SVM)</h3>
+        <span class="tag">small data · high-dim · margins</span>
+        <div class="row"><span class="k">Use</span><span class="v">Small-to-medium datasets, high-dimensional spaces (text, genomics), clear margins. Kernels for non-linear.</span></div>
+        <div class="row"><span class="k">Skip</span><span class="v">Large datasets (slow to train), or when you need probability outputs cheaply.</span></div>
+        <div class="row warn"><span class="k">Watch</span><span class="v">Must scale features. Kernel + C + gamma tuning matters a lot.</span></div>
+      </div>
+
+      <div class="card">
+        <h3>k-Nearest Neighbors (kNN)</h3>
+        <span class="tag">no training · lazy · intuitive</span>
+        <div class="row"><span class="k">Use</span><span class="v">Small datasets, low dimensions, quick baseline, recommendation-style similarity.</span></div>
+        <div class="row"><span class="k">Skip</span><span class="v">Large or high-dimensional data. Prediction is slow and distances break down.</span></div>
+        <div class="row warn"><span class="k">Watch</span><span class="v">Scale features, choose k carefully, suffers from the curse of dimensionality.</span></div>
+      </div>
+
+      <div class="card">
+        <h3>Naive Bayes</h3>
+        <span class="tag">text · fast · probabilistic</span>
+        <div class="row"><span class="k">Use</span><span class="v">Text classification, spam filtering, high-dimensional sparse features, very fast baseline.</span></div>
+        <div class="row"><span class="k">Skip</span><span class="v">Features are strongly correlated, or you need calibrated probabilities.</span></div>
+        <div class="row warn"><span class="k">Watch</span><span class="v">The independence assumption is usually false but often works anyway.</span></div>
+      </div>
+
+      <div class="card">
+        <h3>Regularized Linear (Ridge / Lasso / ElasticNet)</h3>
+        <span class="tag">high-dim · feature selection</span>
+        <div class="row"><span class="k">Use</span><span class="v">Many features, risk of overfitting. Lasso zeros out weak features; Ridge shrinks; ElasticNet blends.</span></div>
+        <div class="row"><span class="k">Skip</span><span class="v">Clearly non-linear relationships that no feature engineering fixes.</span></div>
+        <div class="row warn"><span class="k">Watch</span><span class="v">Tune the regularization strength via cross-validation, always scale first.</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">03</span><h2>Unsupervised: clustering & structure</h2></div>
+    <div class="grid">
+
+      <div class="card">
+        <h3>K-Means</h3>
+        <span class="tag">clustering · fast · spherical</span>
+        <div class="row"><span class="k">Use</span><span class="v">You roughly know the number of clusters, groups are compact and similar in size.</span></div>
+        <div class="row"><span class="k">Skip</span><span class="v">Irregular shapes, varying density, or unknown cluster count.</span></div>
+        <div class="row warn"><span class="k">Watch</span><span class="v">Must set k, scale features, sensitive to initialization and outliers.</span></div>
+      </div>
+
+      <div class="card">
+        <h3>DBSCAN</h3>
+        <span class="tag">density · finds outliers · no k</span>
+        <div class="row"><span class="k">Use</span><span class="v">Arbitrary cluster shapes, unknown cluster count, want automatic outlier detection.</span></div>
+        <div class="row"><span class="k">Skip</span><span class="v">Clusters of very different densities, high dimensions.</span></div>
+        <div class="row warn"><span class="k">Watch</span><span class="v">eps and min_samples are fiddly. Distance meaning degrades in high dimensions.</span></div>
+      </div>
+
+      <div class="card">
+        <h3>Hierarchical (Agglomerative)</h3>
+        <span class="tag">dendrogram · nested groups</span>
+        <div class="row"><span class="k">Use</span><span class="v">Want a cluster hierarchy or dendrogram, small datasets, don't want to preset k.</span></div>
+        <div class="row"><span class="k">Skip</span><span class="v">Large datasets, it scales poorly.</span></div>
+        <div class="row warn"><span class="k">Watch</span><span class="v">Linkage choice (ward, average, complete) changes results significantly.</span></div>
+      </div>
+
+      <div class="card">
+        <h3>PCA</h3>
+        <span class="tag">dim-reduction · linear · preprocessing</span>
+        <div class="row"><span class="k">Use</span><span class="v">Reduce dimensions, remove correlation, speed up models, visualize variance structure.</span></div>
+        <div class="row"><span class="k">Skip</span><span class="v">You need interpretable features, or structure is non-linear (use t-SNE / UMAP to visualize).</span></div>
+        <div class="row warn"><span class="k">Watch</span><span class="v">Scale first. Components are combinations, not original features.</span></div>
+      </div>
+
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">04</span><h2>Fast lookup by situation</h2></div>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Situation</th><th>First reach for</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td>Tabular, want best accuracy</td><td>XGBoost / LightGBM</td><td>Consistently strongest on structured data</td></tr>
+          <tr><td>Need to explain to stakeholders</td><td>Logistic Reg / single Tree</td><td>Coefficients or readable rules</td></tr>
+          <tr><td>Quick strong baseline</td><td>Random Forest</td><td>Robust with almost no tuning</td></tr>
+          <tr><td>Text classification</td><td>Naive Bayes / Linear SVM</td><td>Fast on sparse high-dim features</td></tr>
+          <tr><td>Small, high-dimensional data</td><td>SVM</td><td>Works well when samples are few</td></tr>
+          <tr><td>Many features, overfitting</td><td>Lasso / ElasticNet</td><td>Shrinks and selects features</td></tr>
+          <tr><td>Group data, know cluster count</td><td>K-Means</td><td>Fast and simple</td></tr>
+          <tr><td>Group data, odd shapes / outliers</td><td>DBSCAN</td><td>No k needed, flags noise</td></tr>
+          <tr><td>Too many features to model</td><td>PCA</td><td>Compress before modeling</td></tr>
+          <tr><td>Tiny dataset, quick check</td><td>kNN</td><td>No training, intuitive</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">05</span><h2>Interview one-liners</h2></div>
+    <div class="card">
+      <div class="row"><span class="k">Bias/Var</span><span class="v">Linear = high bias, low variance. Deep tree / kNN(low k) = low bias, high variance. Ensembles cut variance.</span></div>
+      <div class="row"><span class="k">Bagging</span><span class="v">Random Forest: parallel trees on bootstrapped samples, reduces variance.</span></div>
+      <div class="row"><span class="k">Boosting</span><span class="v">Sequential trees fixing prior errors, reduces bias. XGBoost/LightGBM.</span></div>
+      <div class="row"><span class="k">Scaling</span><span class="v">Needed for SVM, kNN, K-Means, PCA, linear-with-regularization. Not for tree-based models.</span></div>
+      <div class="row"><span class="k">Imbalance</span><span class="v">Class weights, resampling (SMOTE), and judge with precision/recall/F1 or PR-AUC, not accuracy.</span></div>
+      <div class="row"><span class="k">L1 vs L2</span><span class="v">L1 (Lasso) drives weights to zero (selection). L2 (Ridge) shrinks smoothly, keeps all.</span></div>
+      <div class="chips">
+        <span class="chip">no free lunch</span>
+        <span class="chip">baseline first</span>
+        <span class="chip">CV everything</span>
+        <span class="chip">leakage kills</span>
+        <span class="chip">metric ≠ accuracy</span>
+      </div>
+    </div>
+    <div class="pitfall"><b>Most common real-world mistake:</b> data leakage. Fit scalers, encoders, and imputers on the training fold only, inside cross-validation, never on the full dataset before splitting.</div>
+  </section>
+
+  <footer>CLASSICAL ML · MODEL SELECTION · v1 · for interview revision + project decisions</footer>
+
+</div>
+</body>
+</html>
