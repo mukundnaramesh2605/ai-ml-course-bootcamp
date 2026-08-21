@@ -49,6 +49,10 @@
   .row .k{flex:0 0 62px;color:var(--accent);font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:.06em;padding-top:2px;}
   .row .v{flex:1;color:var(--ink);}
   .row.warn .k{color:var(--warn);}
+  .row.ex{margin-top:11px;padding-top:11px;border-top:1px dashed var(--line);}
+  .row.ex .k{color:#8a6d3b;}
+  .row.ex .v{font-size:13px;color:var(--sub);}
+  .row.ex .v b{color:var(--ink);font-weight:600;}
 
   table{width:100%;border-collapse:collapse;font-size:13.5px;}
   th,td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line);vertical-align:top;}
@@ -89,7 +93,20 @@
   </header>
 
   <section>
-    <div class="sec-head"><span class="sec-num">01</span><h2>Start here: the 30-second decision</h2></div>
+    <div class="sec-head"><span class="sec-num">01</span><h2>First, what is tabular data?</h2></div>
+    <p class="lede" style="margin-bottom:16px;">Rows are records, columns are features. A spreadsheet. Most classical ML lives here. This one loan table is reused across every model below so you can see what each is for.</p>
+    <div class="tbl-wrap" style="margin-bottom:34px;">
+      <table>
+        <thead><tr><th>Age</th><th>Income</th><th>Loan Amt</th><th>Credit Score</th><th>Employed</th><th>Approved</th></tr></thead>
+        <tbody>
+          <tr><td>28</td><td>45,000</td><td>15,000</td><td>680</td><td>Yes</td><td>Yes</td></tr>
+          <tr><td>45</td><td>90,000</td><td>50,000</td><td>720</td><td>Yes</td><td>Yes</td></tr>
+          <tr><td>33</td><td>30,000</td><td>40,000</td><td>590</td><td>No</td><td>No</td></tr>
+          <tr><td>52</td><td>120,000</td><td>20,000</td><td>810</td><td>Yes</td><td>Yes</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="sec-head"><span class="sec-num">02</span><h2>The 30-second decision</h2></div>
     <div class="flow">
       <ol>
         <li>Is the target a <b>label or a number?</b> Label to classification, number to regression. No target to clustering or dimensionality reduction.</li>
@@ -102,7 +119,7 @@
   </section>
 
   <section>
-    <div class="sec-head"><span class="sec-num">02</span><h2>Supervised: classification & regression</h2></div>
+    <div class="sec-head"><span class="sec-num">03</span><h2>Supervised: classification & regression</h2></div>
     <div class="grid">
 
       <div class="card">
@@ -111,6 +128,7 @@
         <div class="row"><span class="k">Use</span><span class="v">Linear relationships, need coefficients you can explain, want a baseline before anything fancy.</span></div>
         <div class="row"><span class="k">Skip</span><span class="v">Strong non-linear patterns, heavy feature interactions.</span></div>
         <div class="row warn"><span class="k">Watch</span><span class="v">Scale features, check multicollinearity, regularize (L1/L2) when features outnumber clean signal.</span></div>
+        <div class="row ex"><span class="k">Ex</span><span class="v">Predict <b>Approved (Yes/No)</b> from the loan table, with a coefficient per feature you can explain. Swap target to a number: predict <b>Loan Amount offered</b>.</span></div>
       </div>
 
       <div class="card">
@@ -119,6 +137,7 @@
         <div class="row"><span class="k">Use</span><span class="v">Need a human-readable rule set, mixed feature types, non-linear splits, no scaling needed.</span></div>
         <div class="row"><span class="k">Skip</span><span class="v">You need stable, high accuracy. A single tree overfits easily.</span></div>
         <div class="row warn"><span class="k">Watch</span><span class="v">Prune or cap depth. Tiny data changes reshape the whole tree.</span></div>
+        <div class="row ex"><span class="k">Ex</span><span class="v">Same loan table, output is a printable rule: <b>if credit score &lt; 600 and employed = No then reject</b>.</span></div>
       </div>
 
       <div class="card">
@@ -127,6 +146,7 @@
         <div class="row"><span class="k">Use</span><span class="v">Strong default for tabular. Handles non-linearity and noise, minimal tuning, gives feature importance.</span></div>
         <div class="row"><span class="k">Skip</span><span class="v">Very large data where boosting wins, or when you need the single best score.</span></div>
         <div class="row warn"><span class="k">Watch</span><span class="v">Larger and slower than boosting at similar accuracy. Less interpretable than one tree.</span></div>
+        <div class="row ex"><span class="k">Ex</span><span class="v">Identical loan table, hundreds of trees vote on <b>Approved</b>. Steadier than one tree, almost no tuning.</span></div>
       </div>
 
       <div class="card">
@@ -135,6 +155,7 @@
         <div class="row"><span class="k">Use</span><span class="v">The go-to for winning tabular performance, structured data, competitions, most production tabular tasks.</span></div>
         <div class="row"><span class="k">Skip</span><span class="v">Tiny datasets, or when full interpretability is mandatory.</span></div>
         <div class="row warn"><span class="k">Watch</span><span class="v">Sensitive to hyperparameters. Can overfit without early stopping and learning-rate control.</span></div>
+        <div class="row ex"><span class="k">Ex</span><span class="v">Same loan table but <b>200,000 rows and 40 columns</b>. Squeezes out the highest accuracy on this structured data.</span></div>
       </div>
 
       <div class="card">
@@ -143,6 +164,7 @@
         <div class="row"><span class="k">Use</span><span class="v">Small-to-medium datasets, high-dimensional spaces (text, genomics), clear margins. Kernels for non-linear.</span></div>
         <div class="row"><span class="k">Skip</span><span class="v">Large datasets (slow to train), or when you need probability outputs cheaply.</span></div>
         <div class="row warn"><span class="k">Watch</span><span class="v">Must scale features. Kernel + C + gamma tuning matters a lot.</span></div>
+        <div class="row ex"><span class="k">Ex</span><span class="v"><b>80 applicants, 300 columns</b> (every transaction category, device signal). Few rows, many features. SVM handles that shape.</span></div>
       </div>
 
       <div class="card">
@@ -151,6 +173,7 @@
         <div class="row"><span class="k">Use</span><span class="v">Small datasets, low dimensions, quick baseline, recommendation-style similarity.</span></div>
         <div class="row"><span class="k">Skip</span><span class="v">Large or high-dimensional data. Prediction is slow and distances break down.</span></div>
         <div class="row warn"><span class="k">Watch</span><span class="v">Scale features, choose k carefully, suffers from the curse of dimensionality.</span></div>
+        <div class="row ex"><span class="k">Ex</span><span class="v">New applicant arrives. Find the <b>5 most similar past applicants</b> by age/income/score, predict the majority outcome.</span></div>
       </div>
 
       <div class="card">
@@ -159,6 +182,7 @@
         <div class="row"><span class="k">Use</span><span class="v">Text classification, spam filtering, high-dimensional sparse features, very fast baseline.</span></div>
         <div class="row"><span class="k">Skip</span><span class="v">Features are strongly correlated, or you need calibrated probabilities.</span></div>
         <div class="row warn"><span class="k">Watch</span><span class="v">The independence assumption is usually false but often works anyway.</span></div>
+        <div class="row ex"><span class="k">Ex</span><span class="v">Leave loans: table of emails, columns are <b>word counts</b>. Predict <b>spam / not spam</b>.</span></div>
       </div>
 
       <div class="card">
@@ -167,13 +191,14 @@
         <div class="row"><span class="k">Use</span><span class="v">Many features, risk of overfitting. Lasso zeros out weak features; Ridge shrinks; ElasticNet blends.</span></div>
         <div class="row"><span class="k">Skip</span><span class="v">Clearly non-linear relationships that no feature engineering fixes.</span></div>
         <div class="row warn"><span class="k">Watch</span><span class="v">Tune the regularization strength via cross-validation, always scale first.</span></div>
+        <div class="row ex"><span class="k">Ex</span><span class="v">Loan table blown up to <b>500 columns</b>. Lasso zeros out the useless ones and keeps the few that predict <b>Approved</b>.</span></div>
       </div>
 
     </div>
   </section>
 
   <section>
-    <div class="sec-head"><span class="sec-num">03</span><h2>Unsupervised: clustering & structure</h2></div>
+    <div class="sec-head"><span class="sec-num">04</span><h2>Unsupervised: clustering & structure</h2></div>
     <div class="grid">
 
       <div class="card">
@@ -182,6 +207,7 @@
         <div class="row"><span class="k">Use</span><span class="v">You roughly know the number of clusters, groups are compact and similar in size.</span></div>
         <div class="row"><span class="k">Skip</span><span class="v">Irregular shapes, varying density, or unknown cluster count.</span></div>
         <div class="row warn"><span class="k">Watch</span><span class="v">Must set k, scale features, sensitive to initialization and outliers.</span></div>
+        <div class="row ex"><span class="k">Ex</span><span class="v">Drop the <b>Approved</b> column. Group customers by age and income into <b>3 segments</b>, no target needed.</span></div>
       </div>
 
       <div class="card">
@@ -190,6 +216,7 @@
         <div class="row"><span class="k">Use</span><span class="v">Arbitrary cluster shapes, unknown cluster count, want automatic outlier detection.</span></div>
         <div class="row"><span class="k">Skip</span><span class="v">Clusters of very different densities, high dimensions.</span></div>
         <div class="row warn"><span class="k">Watch</span><span class="v">eps and min_samples are fiddly. Distance meaning degrades in high dimensions.</span></div>
+        <div class="row ex"><span class="k">Ex</span><span class="v">Same customers, but clusters are odd-shaped and a few applicants sit far off. DBSCAN groups them and <b>flags the outliers</b>.</span></div>
       </div>
 
       <div class="card">
@@ -198,6 +225,7 @@
         <div class="row"><span class="k">Use</span><span class="v">Want a cluster hierarchy or dendrogram, small datasets, don't want to preset k.</span></div>
         <div class="row"><span class="k">Skip</span><span class="v">Large datasets, it scales poorly.</span></div>
         <div class="row warn"><span class="k">Watch</span><span class="v">Linkage choice (ward, average, complete) changes results significantly.</span></div>
+        <div class="row ex"><span class="k">Ex</span><span class="v">Build a <b>dendrogram</b> of customers, from every-person-alone up to one big group, and cut it where the segments look right.</span></div>
       </div>
 
       <div class="card">
@@ -206,13 +234,14 @@
         <div class="row"><span class="k">Use</span><span class="v">Reduce dimensions, remove correlation, speed up models, visualize variance structure.</span></div>
         <div class="row"><span class="k">Skip</span><span class="v">You need interpretable features, or structure is non-linear (use t-SNE / UMAP to visualize).</span></div>
         <div class="row warn"><span class="k">Watch</span><span class="v">Scale first. Components are combinations, not original features.</span></div>
+        <div class="row ex"><span class="k">Ex</span><span class="v"><b>50 correlated financial columns</b> compressed into ~5 combined dimensions, so the other models run faster.</span></div>
       </div>
 
     </div>
   </section>
 
   <section>
-    <div class="sec-head"><span class="sec-num">04</span><h2>Fast lookup by situation</h2></div>
+    <div class="sec-head"><span class="sec-num">05</span><h2>Fast lookup by situation</h2></div>
     <div class="tbl-wrap">
       <table>
         <thead><tr><th>Situation</th><th>First reach for</th><th>Why</th></tr></thead>
@@ -233,7 +262,7 @@
   </section>
 
   <section>
-    <div class="sec-head"><span class="sec-num">05</span><h2>Interview one-liners</h2></div>
+    <div class="sec-head"><span class="sec-num">06</span><h2>Interview one-liners</h2></div>
     <div class="card">
       <div class="row"><span class="k">Bias/Var</span><span class="v">Linear = high bias, low variance. Deep tree / kNN(low k) = low bias, high variance. Ensembles cut variance.</span></div>
       <div class="row"><span class="k">Bagging</span><span class="v">Random Forest: parallel trees on bootstrapped samples, reduces variance.</span></div>
