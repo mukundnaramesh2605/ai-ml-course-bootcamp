@@ -262,7 +262,90 @@
   </section>
 
   <section>
-    <div class="sec-head"><span class="sec-num">06</span><h2>Interview one-liners</h2></div>
+    <div class="sec-head"><span class="sec-num">06</span><h2>When to scale or normalize</h2></div>
+    <p class="lede" style="margin-bottom:16px;">Scaling matters when a model measures <b>distance</b> or uses <b>gradients / regularization</b>. It does not matter for tree-based models, which split one feature at a time. Fit the scaler on the <b>training fold only</b>.</p>
+    <div class="tbl-wrap" style="margin-bottom:16px;">
+      <table>
+        <thead><tr><th>Model</th><th>Scale?</th><th>Why</th></tr></thead>
+        <tbody>
+          <tr><td>SVM</td><td>Yes</td><td>Uses distances and margins</td></tr>
+          <tr><td>kNN</td><td>Yes</td><td>Pure distance; big-range features dominate</td></tr>
+          <tr><td>K-Means</td><td>Yes</td><td>Distance to centroids</td></tr>
+          <tr><td>PCA</td><td>Yes</td><td>Variance-driven; scale sets the axes</td></tr>
+          <tr><td>Linear/Logistic + L1/L2</td><td>Yes</td><td>Penalty is unfair if scales differ</td></tr>
+          <tr><td>Neural nets</td><td>Yes</td><td>Gradients converge faster when scaled</td></tr>
+          <tr><td>Decision Tree</td><td>No</td><td>Splits one feature at a time</td></tr>
+          <tr><td>Random Forest</td><td>No</td><td>Tree-based; scale-invariant</td></tr>
+          <tr><td>Gradient Boosting</td><td>No</td><td>Tree-based; scale-invariant</td></tr>
+          <tr><td>Naive Bayes</td><td>No</td><td>Works on probabilities / counts</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="grid">
+      <div class="card">
+        <h3>Standardization (Z-score)</h3>
+        <span class="tag">mean 0 · std 1 · default choice</span>
+        <div class="row"><span class="k">Use</span><span class="v">Roughly bell-shaped data, and for SVM, linear models, PCA. The safe default.</span></div>
+        <div class="row ex"><span class="k">Ex</span><span class="v">Income and Age put on the same scale so neither drowns the other.</span></div>
+      </div>
+      <div class="card">
+        <h3>Normalization (Min-Max)</h3>
+        <span class="tag">range 0 to 1 · bounded</span>
+        <div class="row"><span class="k">Use</span><span class="v">You need a fixed range, non-Gaussian data, or image pixels. Sensitive to outliers.</span></div>
+        <div class="row ex"><span class="k">Ex</span><span class="v">Credit Score (300-850) squeezed to 0-1 alongside other bounded features.</span></div>
+      </div>
+    </div>
+    <div class="pitfall"><b>Rule:</b> use <b>RobustScaler</b> when outliers are present (it uses medians). Fit any scaler on train only, then apply to test, never fit on the full dataset.</div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">07</span><h2>Evaluation metrics</h2></div>
+    <p class="lede" style="margin-bottom:16px;">Pick the metric <b>before</b> comparing models. The wrong metric picks the wrong model, especially on imbalanced data.</p>
+
+    <h3 style="font-family:'Fraunces',serif;font-size:18px;margin:0 0 12px;">Classification</h3>
+    <div class="tbl-wrap" style="margin-bottom:16px;">
+      <table>
+        <thead><tr><th>Metric</th><th>Use when</th><th>Careful</th></tr></thead>
+        <tbody>
+          <tr><td>Accuracy</td><td>Classes are balanced</td><td>Lies on imbalance (99% "no fraud")</td></tr>
+          <tr><td>Precision</td><td>False positives are costly</td><td>Ignores missed positives</td></tr>
+          <tr><td>Recall</td><td>False negatives are costly (fraud, disease)</td><td>Ignores false alarms</td></tr>
+          <tr><td>F1</td><td>Need balance of precision & recall</td><td>Hides which one is weak</td></tr>
+          <tr><td>ROC-AUC</td><td>Rank quality, roughly balanced</td><td>Over-optimistic on heavy imbalance</td></tr>
+          <tr><td>PR-AUC</td><td>Imbalanced data, positive class matters</td><td>The right AUC for rare events</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-family:'Fraunces',serif;font-size:18px;margin:0 0 12px;">Regression</h3>
+    <div class="tbl-wrap" style="margin-bottom:16px;">
+      <table>
+        <thead><tr><th>Metric</th><th>Use when</th><th>Careful</th></tr></thead>
+        <tbody>
+          <tr><td>MAE</td><td>Want error in real units, robust to outliers</td><td>Treats all errors linearly</td></tr>
+          <tr><td>MSE / RMSE</td><td>Large errors should hurt more</td><td>Outliers dominate the score</td></tr>
+          <tr><td>R²</td><td>How much variance is explained</td><td>Can rise just by adding features</td></tr>
+          <tr><td>MAPE</td><td>Want error as a percentage</td><td>Breaks near zero values</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3 style="font-family:'Fraunces',serif;font-size:18px;margin:0 0 12px;">Clustering</h3>
+    <div class="tbl-wrap">
+      <table>
+        <thead><tr><th>Metric</th><th>Use when</th><th>Careful</th></tr></thead>
+        <tbody>
+          <tr><td>Silhouette</td><td>No true labels; measures separation</td><td>Assumes convex clusters</td></tr>
+          <tr><td>Inertia / Elbow</td><td>Choosing k for K-Means</td><td>Always drops; judge the bend</td></tr>
+          <tr><td>Adjusted Rand</td><td>You do have true labels to compare</td><td>Needs ground truth</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="pitfall"><b>Fraud example:</b> 99.5% of transactions are legit. A model predicting "all legit" scores 99.5% accuracy and catches zero fraud. Use <b>recall</b> and <b>PR-AUC</b> instead.</div>
+  </section>
+
+  <section>
+    <div class="sec-head"><span class="sec-num">08</span><h2>Interview one-liners</h2></div>
     <div class="card">
       <div class="row"><span class="k">Bias/Var</span><span class="v">Linear = high bias, low variance. Deep tree / kNN(low k) = low bias, high variance. Ensembles cut variance.</span></div>
       <div class="row"><span class="k">Bagging</span><span class="v">Random Forest: parallel trees on bootstrapped samples, reduces variance.</span></div>
