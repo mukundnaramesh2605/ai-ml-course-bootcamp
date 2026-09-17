@@ -26,3 +26,4 @@ TestResults.xml
 /.ipynb_checkpoints
 *.idea
 */.ipynb_checkpoints/
+/CNN/Datatsets/brain-tumor
