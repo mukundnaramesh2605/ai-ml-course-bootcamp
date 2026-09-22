@@ -27,3 +27,4 @@ TestResults.xml
 *.idea
 */.ipynb_checkpoints/
 /CNN/Datatsets/brain-tumor
+CNN/oxford-iiit-pet/images.tar.gz
