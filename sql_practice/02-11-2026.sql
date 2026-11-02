@@ -36,6 +36,7 @@ order by emp_count desc;
 
 
 
+
 -- ------------------------------------------------------------
 -- Q4. [subquery] Compare against a whole-table aggregate
 -- Find all employees who earn more than the average salary of the whole company.
