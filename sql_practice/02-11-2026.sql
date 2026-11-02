@@ -45,7 +45,8 @@ order by avg_salary desc;
 -- Find all employees who earn more than the average salary of the whole company.
 -- Return name and salary, highest first.
 -- ------------------------------------------------------------
-
+select emp_name,salary from employees where salary > (select AVG(salary) from employees)
+order by salary DESC;
 
 
 -- ------------------------------------------------------------
