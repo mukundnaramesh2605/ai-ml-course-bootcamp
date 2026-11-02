@@ -73,7 +73,8 @@ join departments d on d.dept_id = e.dept_id) as ranked where ranked.rk=1;
 -- Employees with no manager (Anita) must still appear, manager shown as NULL.
 -- Sort by employee name.
 -- ------------------------------------------------------------
-
+select e.emp_name,m.emp_name as 'manager_name' from employees e
+left join employees m on e.manager_id = m.emp_id;
 
 
 -- ------------------------------------------------------------
