@@ -81,7 +81,9 @@ left join employees m on e.manager_id = m.emp_id;
 -- Q8. [join / null] Anti-join
 -- Find customers who have never placed an order. Return customer name and city.
 -- ------------------------------------------------------------
-
+select c.cust_name,c.city from customers c
+left join orders o on c.cust_id = o.cust_id
+where o.order_id IS NULL;
 
 
 -- ------------------------------------------------------------
