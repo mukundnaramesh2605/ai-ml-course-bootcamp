@@ -99,3 +99,11 @@ select order_date,amount,sum(amount) over(order by order_date asc) as 'running_t
 -- Count completed orders and total completed revenue per month.
 -- Return month as 'YYYY-MM', the order count, and total amount. Sort by month.
 -- ------------------------------------------------------------
+SELECT 
+    DATE_FORMAT(order_date, '%Y-%m') AS 'month',
+    COUNT(order_id) AS order_count,
+    SUM(amount) AS total_amount
+FROM orders
+WHERE status = 'Completed'
+GROUP BY month
+ORDER BY month ASC;
