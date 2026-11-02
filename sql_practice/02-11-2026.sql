@@ -63,7 +63,8 @@ select emp_name, salary from employees where salary < (select MAX(salary) from e
 -- If a department has a tie for highest, return all tied employees.
 -- Employees with no department are excluded.
 -- ------------------------------------------------------------
-
+SELECT * from (select d.dept_name,e.emp_name,e.salary ,rank() over(partition by e.dept_id order by e.salary desc) as 'rk' from employees e
+join departments d on d.dept_id = e.dept_id) as ranked where ranked.rk=1;
 
 
 -- ------------------------------------------------------------
