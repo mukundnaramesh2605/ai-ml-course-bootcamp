@@ -33,7 +33,11 @@ order by emp_count desc;
 -- Show each department name and its average salary, but only for departments
 -- whose average salary is above 70000. Round the average to 2 decimals.
 -- ------------------------------------------------------------
-
+select d.dept_name,ROUND(AVG(e.salary),2) as 'avg_salary' from departments d
+join employees e on d.dept_id=e.dept_id
+group by d.dept_name
+having avg_salary > 70000
+order by avg_salary desc;
 
 
 
