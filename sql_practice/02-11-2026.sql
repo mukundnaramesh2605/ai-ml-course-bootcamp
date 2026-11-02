@@ -91,7 +91,7 @@ where o.order_id IS NULL;
 -- For customer 101 (Ravi), list each order date, amount, and a running total of
 -- amount ordered over time, counting ONLY Completed orders. Order by date.
 -- ------------------------------------------------------------
-
+select order_date,amount,sum(amount) over(order by order_date asc) as 'running_total' from orders;
 
 
 -- ------------------------------------------------------------
