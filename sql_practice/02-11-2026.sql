@@ -54,8 +54,8 @@ order by salary DESC;
 -- Return the second highest DISTINCT salary in the company as a single value.
 -- Note the ties: two people at 90000, two at 60000.
 -- ------------------------------------------------------------
-
-
+-- SELECT * from (select emp_name, salary ,rank() over(order by salary desc) as 'rk' from employees) as ranked where ranked.rk=2;
+select emp_name, salary from employees where salary < (select MAX(salary) from employees) limit 1 OFFSET 1;
 
 -- ------------------------------------------------------------
 -- Q6. [window] Top per group
