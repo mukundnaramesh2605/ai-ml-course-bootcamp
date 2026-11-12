@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/mukundanramesh/projects/ai_ml_course_bootcamp_practice/ai-ml-course-bootcamp/MLOPS/mlflow_tracking/820441688299189998/385e4b78188a4ea19ea566a2d935fcf3/artifacts
+end_time: 1794491177841
+entry_point_name: ''
+experiment_id: '820441688299189998'
+lifecycle_stage: active
+run_id: 385e4b78188a4ea19ea566a2d935fcf3
+run_name: Decision Tree Depth 8
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1794491174346
+status: 3
+tags: []
+user_id: mukundanramesh

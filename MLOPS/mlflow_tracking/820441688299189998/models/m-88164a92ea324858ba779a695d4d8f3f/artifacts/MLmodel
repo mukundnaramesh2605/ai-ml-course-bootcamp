@@ -1,0 +1,26 @@
+artifact_path: file:///Users/mukundanramesh/projects/ai_ml_course_bootcamp_practice/ai-ml-course-bootcamp/MLOPS/mlflow_tracking/820441688299189998/models/m-88164a92ea324858ba779a695d4d8f3f/artifacts
+flavors:
+  python_function:
+    env:
+      conda: conda.yaml
+      virtualenv: python_env.yaml
+    loader_module: mlflow.sklearn
+    model_path: model.skops
+    predict_fn: predict
+    python_version: 3.11.15
+  sklearn:
+    code: null
+    pickled_model: model.skops
+    serialization_format: skops
+    sklearn_version: 1.9.0
+    skops_trusted_types:
+    - sklearn.tree._tree.Tree
+    - sklearn.metrics._dist_metrics.EuclideanDistance64
+    - sklearn.neighbors._kd_tree.KDTree
+mlflow_version: 3.13.0
+model_id: m-88164a92ea324858ba779a695d4d8f3f
+model_size_bytes: 1081378
+model_uuid: m-88164a92ea324858ba779a695d4d8f3f
+prompts: null
+run_id: f21afb2152a34206a40458ad2d1bdc04
+utc_time_created: '2026-11-12 13:46:17.896136'
