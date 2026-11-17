@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/mukundanramesh/projects/ai_ml_course_bootcamp_practice/ai-ml-course-bootcamp/MLOPS/mlflow_tracking/820441688299189998/fc55992796e3425183d6cb8e8b1a8341/artifacts
+end_time: 1794884727204
+entry_point_name: ''
+experiment_id: '820441688299189998'
+lifecycle_stage: active
+run_id: fc55992796e3425183d6cb8e8b1a8341
+run_name: Random Forest 100
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1794884723350
+status: 3
+tags: []
+user_id: mukundanramesh
