@@ -1,0 +1,14 @@
+artifact_uri: file:///Users/mukundanramesh/projects/ai_ml_course_bootcamp_practice/ai-ml-course-bootcamp/MLOPS/mlflow_tracking/820441688299189998/eb6d8922e8d341418aef41fd74a26a00/artifacts
+end_time: 1794884711192
+entry_point_name: ''
+experiment_id: '820441688299189998'
+lifecycle_stage: active
+run_id: eb6d8922e8d341418aef41fd74a26a00
+run_name: Logistic Regression
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1794884703829
+status: 3
+tags: []
+user_id: mukundanramesh
