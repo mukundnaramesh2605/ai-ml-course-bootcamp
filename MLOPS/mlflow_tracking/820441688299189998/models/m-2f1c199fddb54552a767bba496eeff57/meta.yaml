@@ -1,0 +1,10 @@
+artifact_location: file:///Users/mukundanramesh/projects/ai_ml_course_bootcamp_practice/ai-ml-course-bootcamp/MLOPS/mlflow_tracking/820441688299189998/models/m-2f1c199fddb54552a767bba496eeff57/artifacts
+creation_timestamp: 1795490061416
+experiment_id: '820441688299189998'
+last_updated_timestamp: 1795490065195
+model_id: m-2f1c199fddb54552a767bba496eeff57
+model_type: null
+name: model
+source_run_id: b8bdaa549d844555b72ce0f3c68d00e3
+status: 2
+status_message: null
